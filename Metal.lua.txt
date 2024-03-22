@@ -2203,12 +2203,12 @@ local Tabs = {
 	Sh = Window: AddTab({ Title = "Shop", Icon = "shopping-cart" }),
 	St = Window:AddTab({ Title = " • Status", Icon = "" }),
 	Settings= Window:AddTab({ Title = "Setting", Icon = "settings" }),
-    De = Window:AddTab({ Title = "BF & Raid", Icon = "chevrons-right" }),   
+    De = Window:AddTab({ Title = " • BF & Raid", Icon = "" }),   
     Main= Window:AddTab({ Title = "Main", Icon = "home" }),    
     Rc = Window:AddTab({ Title = " • RaceV4", Icon = "" }),    
     Se = Window:AddTab({ Title = "Sea Event", Icon = "waves" }),    
     Lc = Window:AddTab({ Title = " • Local Player", Icon = "" }),   
-    Qs= Window:AddTab({ Title = " • Item/Quest", Icon = "paintbrush-2" }),
+    Qs= Window:AddTab({ Title = " Item/Quest", Icon = "paintbrush-2" }),
     About = Window: AddTab({ Title = " • Onwer", Icon = "" }),
 }
 
@@ -2218,12 +2218,22 @@ do
 
    Tabs.About:AddParagraph({
         Title = "Owner",
-        Content = "Mikee & HuySimp"
+        Content = "Mekay& HuySimp"
     })
 
   Tabs.About:AddParagraph({
         Title = "YouTube",
         Content = "Mekay & Huy Simp"
+    })
+    
+    Tabs.About:AddParagraph({
+        Title = "Support",
+        Content = "Fluxus & Delta"
+    })
+    
+    Tabs.About:AddParagraph({
+        Title = "I Don't Skid",
+        Content = ""
     })
     
     Fluent:Notify({
@@ -3637,7 +3647,7 @@ end)
         _G.SelectChip = Value
     end)
     Tabs.De:AddButton({
-        Title = "Mua Chip Đã Chọn",
+        Title = "Buy Chip",
         Description = "",
         Callback = function()
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("RaidsNpc","Select",_G.SelectChip)
