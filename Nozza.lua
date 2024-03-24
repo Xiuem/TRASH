@@ -29,35 +29,6 @@ local Tabs = {
 local Options = Fluent.Options
 
 do
-
-Tabs.About:AddParagraph({
-        Title = "Owner",
-        Content = "Mekay & HuySimp"
-    })
-
-  Tabs.About:AddParagraph({
-        Title = "YouTube",
-        Content = "Mekay & Huy Simp"
-    })
-    
-    Tabs.About:AddParagraph({
-        Title = "Support",
-        Content = "Fluxus & Delta"
-    })
-    
-    Tabs.About:AddParagraph({
-        Title = "I Don't Skid",
-        Content = "How to solve the worry"
-    })
-    
-    Fluent:Notify({
-        Title = "Nozza Hub",
-        Content = "Loading",
-        SubContent = "", -- Optional
-        Duration = 5 -- Set to nil to make the notification not disappear
-    })
-    end
-    
 --------------------------------------------------------------------------------------------------------------------------------------------
     repeat wait() until game.Players
     repeat wait() until game.Players.LocalPlayer
