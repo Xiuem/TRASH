@@ -2233,7 +2233,7 @@ do
     
     Tabs.About:AddParagraph({
         Title = "I Don't Skid",
-        Content = "Skid LoL"
+        Content = "How to solve the worry"
     })
     
     Fluent:Notify({
@@ -3759,3 +3759,8 @@ local Toggle = Tabs.De:AddToggle("MyToggle", {Title = "Awakener Fruit", Default 
     Dropdown:OnChanged(function(Value)
         _G.SelectFram = Value
     end)
+    
+    local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Start Fram", Default = false })
+    Toggle:OnChanged(function(Value)
+   _G.concubu = Value
+		end)
