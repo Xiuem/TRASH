@@ -3769,7 +3769,7 @@ local Toggle = Tabs.De:AddToggle("MyToggle", {Title = "Awakener Fruit", Default 
     
     spawn(function()
         while wait() do 
-            if _G.Level then
+            if _G.SelectFram then
                 spawn(function()
                     local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
                     if not string.find(QuestTitle, NameMon) then
