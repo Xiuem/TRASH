@@ -2181,7 +2181,7 @@ function getAllBladeHitsPlayers(Sizes)
 	local Characters = game:GetService("Workspace").Characters:GetChildren()
 	for i=1,#Characters do local v = Characters[i]
 		local Human = v:FindFirstChildOfClass("Humanoid")
-		if v.Name ~= game.Players.LocalPlayer.Name and Human and Human.RootPart and Human.Health > 0 and Client:DistanceFromCharacter(Human.RootPart.Position) < Sizes+10 then
+		if v.Name ~= game.Players.LocalPlayer.Name and Human and Human.RootPart and Human.Health > 0 and Client:DistanceFromCharacter(Human.RootPart.Position) < Sizes+5 then
 			table.insert(Hits,Human.RootPart)
 		end
 	end
@@ -2194,7 +2194,7 @@ end
     TabWidth = 120,
     Size = UDim2.fromOffset(450, 300),
     Acrylic = false, -- The blur may be detectable, setting this to false disables blur entirely
-    Theme = "Light",
+    Theme = "Darker",
     MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
 })
 
@@ -3934,4 +3934,99 @@ spawn(function()
                 end
             end
     end)
+    
+        local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Farm katakuri", Default = false })
+
+    Toggle:OnChanged(function(Value)
+        _G.AutoDoughtBoss = Value
+		StopTween(_G.AutoDoughtBoss)
+    end)
+
+
+    spawn(function()
+		while wait() do
+			if _G.AutoDoughtBoss then
+				pcall(function()
+					if game.ReplicatedStorage:FindFirstChild("Cake Prince") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then   
+						if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then
+							for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do 
+								if v.Name == "Cake Prince" then
+									repeat wait()
+										AutoHaki()
+										EquipWeapon(_G.Select_Weapon)
+										v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+										v.HumanoidRootPart.CanCollide = false
+										topos(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
+									until _G.AutoDoughtBoss == false or not v.Parent or v.Humanoid.Health <= 0
+								end    
+							end    
+						else
+							topos(CFrame.new(-2009.2802734375, 4532.97216796875, -14937.3076171875)) 
+						end
+					else
+						if game.Workspace.Enemies:FindFirstChild("Baking Staff") or game.Workspace.Enemies:FindFirstChild("Head Baker") or game.Workspace.Enemies:FindFirstChild("Cake Guard") or game.Workspace.Enemies:FindFirstChild("Cookie Crafter")  then
+							for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do  
+								if (v.Name == "Baking Staff" or v.Name == "Head Baker" or v.Name == "Cake Guard" or v.Name == "Cookie Crafter") and v.Humanoid.Health > 0 then
+									repeat wait()
+										AutoHaki()
+										EquipWeapon(_G.Select_Weapon)
+										MonFarm = v.Name                
+                                        PosMon = v.HumanoidRootPart.CFrame
+										v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)  
+										POSCAKE = v.HumanoidRootPart.CFrame
+										topos(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
+									until _G.AutoDoughtBoss == false or game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") or not v.Parent or v.Humanoid.Health <= 0
+								end
+							end
+						else
+							topos(CFrame.new(-1820.0634765625, 210.74781799316406, -12297.49609375))
+						end
+					end
+				end)
+			end
+		end
+	end)
+        
+        local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Auto Farm Ectoplasm", Default = false })
+
+    Toggle:OnChanged(function(Value)
+        _G.AutoEctoplasm = Value
+		StopTween(_G.AutoEctoplasm)
+    end)
+    
+    spawn(function()
+        pcall(function()
+            while wait() do
+                if _G.AutoEctoplasm then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Ship Deckhand") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Engineer") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Steward") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Officer") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if string.find(v.Name, "Ship") then
+                                repeat task.wait()
+                                    EquipWeapon(_G.SelectWeapon)
+                                    AutoHaki()
+                                    if string.find(v.Name,"Ship") then
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Head.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                        topos(v.HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                                       FarmPos = v.HumanoidRootPart.CFrame
+                                        MonFarm = v.Name
+                                    else
+                                        topos(CFrame.new(911.35827636719, 125.95812988281, 33159.5390625))
+                                    end
+                                until _G.AutoEctoplasm == false or not v.Parent or v.Humanoid.Health <= 0
+                            end
+                        end
+                    else
+                        local Distance = (Vector3.new(911.35827636719, 125.95812988281, 33159.5390625) - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                        if Distance > 18000 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+                        end
+                        topos(CFrame.new(911.35827636719, 125.95812988281, 33159.5390625))
+                    end
+                end
+            end
+        end)
+    end)
+    
     
