@@ -3744,32 +3744,19 @@ local Toggle = Tabs.De:AddToggle("MyToggle", {Title = "Awakener Fruit", Default 
     
         Tabs.Main:AddParagraph({
         Title = "Main Farm",
-        Content = ""
+        Content = "Level & Bone & Katakuri & Ectoplasm"
     })
 
-    local Dropdown = Tabs.Main:AddDropdown("Dropdown", {
-        Title = "Select Fram",
-        Values = {"Level","Bone","Katakuri"},
-        Multi = false,
-        Default = 1,
-    })
-
-    Dropdown:SetValue("")
-
-    Dropdown:OnChanged(function(Value)
-        _G.SelectFram = Value
-    end)
-    
-    local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Start Fram", Default = false })
+local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Auto Farm Level", Default = false })
 
     Toggle:OnChanged(function(Value)
-        _G.SelectFram = Value
-		StopTween(_G.SelectFram)
+        _G.AutoFarm = Value
+		StopTween(_G.AutoFarm)		
     end)
-    
+
     spawn(function()
-        while wait() do 
-            if _G.SelectFram then
+        while wait() do
+            if _G.AutoFarm then
                 spawn(function()
                     local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
                     if not string.find(QuestTitle, NameMon) then
@@ -3829,3 +3816,41 @@ local Toggle = Tabs.De:AddToggle("MyToggle", {Title = "Awakener Fruit", Default 
         end
     end)
     
+local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Mob Aura", Default = false })
+
+    Toggle:OnChanged(function(Value)
+        _G.AutoFarmNearest = Value
+		StopTween(_G.AutoFarmNearest)		
+    end)
+
+spawn(function()
+	while wait() do
+		if _G.AutoFarmNearest then
+			for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                if v.Name and v:FindFirstChild("Humanoid") then
+			        if v.Humanoid.Health > 0 then
+			            repeat wait()
+			              EquipWeapon(_G.SelectWeapon)
+			                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+			                	local args = {
+				                	[1] = "Buso"
+			                	}
+			                	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+			               	end
+			                topos(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
+			                v.HumanoidRootPart.CanCollide = false
+			                Fastattack = true
+			                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+						    game:GetService("VirtualUser"):CaptureController()
+				       	    game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672), game.Workspace.CurrentCamera.CFrame)
+				       	    AutoFarmNearestMagnet = true
+				       	    PosMon = v.HumanoidRootPart.CFrame
+			            until not _G.AutoFarmNearest or not v.Parent or v.Humanoid.Health <= 0 
+			            AutoFarmNearestMagnet = false
+			            Fastattack = false
+			        end
+			    end
+			end
+		end
+	end
+    end)
