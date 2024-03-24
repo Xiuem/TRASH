@@ -3761,15 +3761,14 @@ local Toggle = Tabs.De:AddToggle("MyToggle", {Title = "Awakener Fruit", Default 
     end)
     
     local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Start Fram", Default = false })
-    
-    Toggle:OnChanged(function(Value)
-   _G.StartFram = Value
-		Djtmestop(_G.StartFarm)
-	end    
-})
 
-		    spawn(function()
-        while wait() do
+    Toggle:OnChanged(function(Value)
+        _G.SelectFram = Value
+		StopTween(_G.SelectFram)
+    end)
+    
+    spawn(function()
+        while wait() do 
             if _G.Level then
                 spawn(function()
                     local QuestTitle = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
