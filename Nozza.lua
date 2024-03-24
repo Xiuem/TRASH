@@ -1,19 +1,4 @@
 
-spawn(function() 
-    repeat
-        task.wait()
-    until game:IsLoaded()
-    repeat
-        task.wait()
-    until game.Players
-    repeat
-        task.wait()
-    until game.Players.LocalPlayer and game.Players.LocalPlayer.Team ~= nil 
-    wait(1.5)
-    require(game.ReplicatedStorage.Notification).new("<Color=Red> Welcome To Nozza Hub <Color=/>"):Display()
-    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Script So Mups <Color=/>"):Display()
-end)
-----------------------------------------------------------------------------------------------------------------------------------------------
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
@@ -72,6 +57,7 @@ Tabs.About:AddParagraph({
         Duration = 5 -- Set to nil to make the notification not disappear
     })
     end
+    
 --------------------------------------------------------------------------------------------------------------------------------------------
     repeat wait() until game.Players
     repeat wait() until game.Players.LocalPlayer
